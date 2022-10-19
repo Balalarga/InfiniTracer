@@ -1,0 +1,9 @@
+.cache/
+VsProject/
+Debug/
+Release/
+build/
+release/
+compile_commands.json
+
+
