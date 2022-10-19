@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 
-project(OpenglWrapper LANGUAGES CXX)
+project(InfiniTracer LANGUAGES CXX)
 set(VS_STARTUP_PROJECT ${PROJECT_NAME})
 
 set(CMAKE_CXX_STANDARD 20)
