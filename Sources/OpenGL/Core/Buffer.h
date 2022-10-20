@@ -25,13 +25,20 @@ struct DataPtr
 
 struct Buffer
 {
-    Buffer(const DataPtr& data = {}, const BufferLayout& layout = BufferLayout());
+    virtual ~Buffer();
 
-    DataPtr Data;
-    BufferLayout Layout;
-    unsigned DrawType = GL_TRIANGLES;
-    unsigned Type = GL_ARRAY_BUFFER;
-    unsigned Mode = GL_STATIC_DRAW;
+    Buffer& Data(const DataPtr& val) { data = val; return *this; }
+    Buffer& Layout(const BufferLayout& val) { layout = val; return *this; }
+    Buffer& DrawType(const unsigned& val) { drawType = val; return *this; }
+    Buffer& Type(const unsigned& val) { type = val; return *this; }
+    Buffer& Mode(const unsigned& val) { mode = val; return *this; }
+    
+    
+    DataPtr data = {};
+    BufferLayout layout = {};
+    unsigned drawType = GL_TRIANGLES;
+    unsigned type = GL_ARRAY_BUFFER;
+    unsigned mode = GL_STATIC_DRAW;
 
-    unsigned Create();
+    virtual unsigned Create();
 };

@@ -15,8 +15,8 @@ public:
     template<class T>
     T& AddObject(T*&& Obj)
     {
-        _renderObjects.push_back(std::unique_ptr<T>(Obj));
-        return *_renderObjects.back().get();
+        _renderObjects.push_back(std::unique_ptr<IRenderable>(Obj));
+        return *Obj;
     }
 
     const std::vector<std::unique_ptr<IRenderable>>& GetObjects() const { return _renderObjects; }

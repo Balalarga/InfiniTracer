@@ -29,6 +29,11 @@ OpenglWindow::OpenglWindow(const ISdlWindowParams& params):
         return;
 
     SDL_GL_MakeCurrent(GetSdlWindow(), _glContext);
+    
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glCullFace(GL_CW);
+    
     auto backColor = GetBackgroundColor();
     glClearColor(backColor.r, backColor.g, backColor.b, backColor.a);
 
@@ -62,6 +67,7 @@ void OpenglWindow::Render()
     {
         for (auto& Obj : scene->GetShaders())
         {
+            Obj->SetUniform("uTexture", 0);
             Obj->Bind();
             Obj->BatchRender();
             Obj->Unbind();

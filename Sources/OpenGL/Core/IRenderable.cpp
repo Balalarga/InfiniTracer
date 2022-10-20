@@ -21,16 +21,16 @@ IRenderable::~IRenderable()
 
 void IRenderable::Render()
 {
-    if ( !_bVisible )
+    if ( !_bVisible || !_vbo.data.Ptr )
         return;
     
     Bind();
-    GLCall(glDrawArrays(_vbo.DrawType, 0, _vbo.Data.Count))
+    GLCall(glDrawArrays(_vbo.drawType, 0, _vbo.data.Count))
 }
 
 bool IRenderable::Setup(const Buffer& vbo)
 {
-    if (!vbo.Data.Ptr)
+    if (!vbo.data.Ptr)
         return false;
     
     _vbo = vbo;

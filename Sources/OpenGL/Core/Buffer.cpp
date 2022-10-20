@@ -19,34 +19,31 @@ DataPtr::DataPtr(void* ptr, unsigned count, unsigned itemSize):
 
 }
 
-Buffer::Buffer(const DataPtr& data, const BufferLayout& layout):
-    Data(data),
-    Layout(layout)
+Buffer::~Buffer()
 {
-
 }
 
 unsigned Buffer::Create()
 {
     unsigned handler = 0;
-    if (!Data.Ptr)
+    if (!data.Ptr)
         return handler;
     
     GLCall(glGenBuffers(1, &handler))
-    GLCall(glBindBuffer(Type, handler))
-    GLCall(glBufferData(Type, Data.Count * Data.ItemSize, Data.Ptr, Mode))
+    GLCall(glBindBuffer(type, handler))
+    GLCall(glBufferData(type, data.Count * data.ItemSize, data.Ptr, mode))
 
     unsigned offset = 0;
-    for (int i = 0; i < Layout.Variables.size(); ++i)
+    for (int i = 0; i < layout.Variables.size(); ++i)
     {
         GLCall(glEnableVertexAttribArray(i))
         GLCall(glVertexAttribPointer(i,
-                              Layout.Variables[i].Count,
-                              Layout.Variables[i].Type,
-                              Layout.Variables[i].Normalized ? GL_FALSE : GL_TRUE,
-                              Layout.Size,
+                              layout.Variables[i].Count,
+                              layout.Variables[i].Type,
+                              layout.Variables[i].Normalized ? GL_FALSE : GL_TRUE,
+                              layout.Size,
                               (void*)offset))
-        offset += Layout.Variables[i].Size * Layout.Variables[i].Count;
+        offset += layout.Variables[i].Size * layout.Variables[i].Count;
     }
     
     return handler;

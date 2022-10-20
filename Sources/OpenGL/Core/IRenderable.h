@@ -1,8 +1,6 @@
 #ifndef RENDERABLE_H
 #define RENDERABLE_H
 
-#include <vector>
-#include <memory>
 #include <GL/glew.h>
 
 #include "Shader.h"
